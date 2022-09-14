@@ -14,6 +14,7 @@ export class App extends Component  {
   async componentDidMount() {
     try {
       const result = await fetchProducts();
+      // add filter for id 71 to fix bug with id duplication
       this.setState({products: result.filter(el => el.id !== '71')})
     } catch {
       this.setState({isError: true})
