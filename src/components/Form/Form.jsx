@@ -1,45 +1,68 @@
-import { Component } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
+const initialState = {
+  name: '',
+  price: '',
+  description: '',
+};
 
+export const Form = ({ onSubmit }) => {
+  const [formInfo, setFormInfo] = useState(initialState);
+  const activeInputRef = useRef();
 
-export class Form extends Component { 
+  useEffect(() => {
+    // activeInputRef.current.focus();
+    activeInputRef.current = formInfo;
 
-    state = {
-        name: '',
-        price: '',
-        description:'',
-    }
-    handleInputChange = (e) => {
-        const { name, value } = e.target;
-        this.setState({
-            [name]:value,
-        })
-    }
-    handleSubmit = (e) => { 
-        
-        e.preventDefault();
-        this.props.onSubmit(this.state)
-    }
+    console.log(activeInputRef);
+  }, []);
 
+  const handleInputChange = e => {
+    const { name, value } = e.target;
 
+    setFormInfo({ ...formInfo, [name]: value });
+  };
 
-    render() {
-        const { name, price, description } = this.state;
-        const{ handleInputChange, handleSubmit } = this;
+  const handleSubmit = e => {
+    e.preventDefault();
 
-        return (
-            <form onSubmit={handleSubmit}>
-                <label>
-                    <input placeholder='Name' type="text" name="name" value={name} onChange={ handleInputChange} />
-                </label>
-            <label> 
-                    <input placeholder='price' type="text" name="price" value={price} onChange={ handleInputChange}  />
-                </label>
-                <label> 
-                    <input placeholder='Description' type="text" name="description" value={description} onChange={ handleInputChange} />
-                </label>
-                <button type="submit">Submit</button>
-            </form>
-        )
-    }
-}
+    onSubmit(formInfo);
+
+    setFormInfo(initialState);
+  };
+
+  const { name, price, description } = formInfo;
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        <input
+          placeholder="Name"
+          type="text"
+          name="name"
+          value={name}
+          onChange={handleInputChange}
+        />
+      </label>
+      <label>
+        <input
+          ref={activeInputRef}
+          placeholder="price"
+          type="text"
+          name="price"
+          value={price}
+          onChange={handleInputChange}
+        />
+      </label>
+      <label>
+        <input
+          placeholder="Description"
+          type="text"
+          name="description"
+          value={description}
+          onChange={handleInputChange}
+        />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
