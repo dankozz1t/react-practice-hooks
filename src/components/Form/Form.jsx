@@ -15,6 +15,7 @@ export const Form = ({ onSubmit }) => {
     activeInputRef.current = formInfo;
 
     console.log(activeInputRef);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInputChange = e => {
