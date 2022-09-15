@@ -1,4 +1,4 @@
-#react practice / remake [github.com/Anastasiia-Svechnikova/react-practice](https://github.com/Anastasiia-Svechnikova/react-practice) in hooks
+# react practice / remake [github.com/Anastasiia-Svechnikova/react-practice](https://github.com/Anastasiia-Svechnikova/react-practice) in hooks
 
 ### Задание
 
